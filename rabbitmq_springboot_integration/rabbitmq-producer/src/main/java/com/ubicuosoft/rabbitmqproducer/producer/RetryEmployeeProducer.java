@@ -1,27 +1,26 @@
 package com.ubicuosoft.rabbitmqproducer.producer;
 
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ubicuosoft.rabbitmqproducer.entities.Picture;
+import com.ubicuosoft.rabbitmqproducer.entities.Employee;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-//@Service
+@Service
 @Slf4j
-public class PictureProducer {
+public class RetryEmployeeProducer {
     @Autowired
     private RabbitTemplate rabbitTemplate;
+
     @Autowired
     private ObjectMapper objectMapper;
 
-    public void send(Picture picture) throws JsonProcessingException {
-        var json=objectMapper.writeValueAsString(picture);
-        rabbitTemplate.convertAndSend("x.picture",picture.getType(), json);
+    public void send(Employee employee) throws JsonProcessingException {
+        var json=objectMapper.writeValueAsString(employee);
+        rabbitTemplate.convertAndSend("x.guideline2.work","", json);
         log.info("Producer--->");
-        log.info("Json object ={}",json);
-        log.info("Image type ={}",picture.getType());
+        log.info("Json employee :{}",json);
     }
 }

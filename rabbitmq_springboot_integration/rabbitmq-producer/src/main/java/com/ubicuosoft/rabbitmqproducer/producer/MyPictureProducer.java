@@ -1,6 +1,5 @@
 package com.ubicuosoft.rabbitmqproducer.producer;
 
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ubicuosoft.rabbitmqproducer.entities.Picture;
@@ -11,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 //@Service
 @Slf4j
-public class PictureProducer {
+public class MyPictureProducer {
     @Autowired
     private RabbitTemplate rabbitTemplate;
     @Autowired
@@ -19,9 +18,8 @@ public class PictureProducer {
 
     public void send(Picture picture) throws JsonProcessingException {
         var json=objectMapper.writeValueAsString(picture);
-        rabbitTemplate.convertAndSend("x.picture",picture.getType(), json);
-        log.info("Producer--->");
-        log.info("Json object ={}",json);
-        log.info("Image type ={}",picture.getType());
+        rabbitTemplate.convertAndSend("x.mypicture","",json);
+        log.info("Producer--->",picture);
+        log.info("Json object {}",json);
     }
 }
