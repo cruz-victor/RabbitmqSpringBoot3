@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 @SpringBootApplication
-@EnableScheduling
+//@EnableScheduling
 public class RabbitmqProducerApplication implements CommandLineRunner {
 
 //    @Autowired
