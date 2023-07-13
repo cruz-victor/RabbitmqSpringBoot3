@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 
-@Service
+//@Service
 @Slf4j
 public class RetryMarketingConsumer {
     @Autowired
@@ -25,10 +25,11 @@ public class RetryMarketingConsumer {
     }
 
     @RabbitListener(queues = "q.guideline2.marketing.work")
-    public void listener(Message message, Channel channel, @Header(AmqpHeaders.DELIVERY_TAG) long tag) throws IOException {
+    public void listener(Message message, Channel channel, @Header(AmqpHeaders.DELIVERY_TAG) long tag) throws IOException, InterruptedException {
+        Thread.sleep(5000);
         var empleyee=objectMapper.readValue(message.getBody(), Employee.class);
         log.info("Consumer Marketing--->");
-        log.info("Message object--->{}",new String(message.getBody()));
+        log.info("Message marketing object--->{}",new String(message.getBody()));
         channel.basicAck(tag,false);
     }
 }

@@ -30,8 +30,9 @@ public class RetryAccountingConsumer {
     @RabbitListener(queues = "q.guideline2.accounting.work")
     public void listener(Message message, Channel channel, @Header(AmqpHeaders.DELIVERY_TAG) long tag) throws IOException {
         try {
+            Thread.sleep(5000);
             log.info("Consumer Accounting--->");
-            log.info("Message object--->{}",new String(message.getBody()));
+            log.info("Message accounting object--->{}",new String(message.getBody()));
             var employee=objectMapper.readValue(message.getBody(), Employee.class);
             if (StringUtils.isEmpty(employee.getName())){
                 throw new IOException("The name of employe is null");
@@ -39,6 +40,7 @@ public class RetryAccountingConsumer {
                 channel.basicAck(tag,false);
             }
         }catch (Exception e) {
+            log.info("--->xdeat {}",message.getMessageProperties().getXDeathHeader());
             dlxProcessingErrorHandler.handleErrorProcessingMessage(message,channel,tag);
         }
     }

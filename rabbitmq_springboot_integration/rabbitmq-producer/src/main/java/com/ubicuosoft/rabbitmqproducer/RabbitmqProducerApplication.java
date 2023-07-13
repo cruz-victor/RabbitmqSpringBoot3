@@ -8,13 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 @SpringBootApplication
-//@EnableScheduling
+@EnableScheduling
 public class RabbitmqProducerApplication implements CommandLineRunner {
 
 //    @Autowired
@@ -38,8 +39,8 @@ public class RabbitmqProducerApplication implements CommandLineRunner {
 //    @Autowired
 //    private RetryPictureProducer retryPictureProducer;
 
-    @Autowired
-    private RetryEmployeeProducer retryEmployeeProducer;
+//    @Autowired
+//    private RetryEmployeeProducer retryEmployeeProducer;
 
 //    final private List<String> IMAGE_TYPES=List.of("png","jpg","svg");
 //    final private List<String> IMAGE_SOURCES=List.of("web","mobile");
@@ -58,10 +59,10 @@ public class RabbitmqProducerApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
 //        helloRabbimqProducer.send("Hi Vic222");
 
-        for (int i = 0; i < 5; i++) {
-            Employee employee = new Employee(i, null, LocalDate.now());
-            retryEmployeeProducer.send(employee);
-        }
+//        for (int i = 0; i < 5; i++) {
+//            Employee employee = new Employee(i, null, LocalDate.now());
+//            retryEmployeeProducer.send(employee);
+//        }
 
 //        for (int i = 0; i < 10; i++) {
 //            Picture picture=new Picture();
